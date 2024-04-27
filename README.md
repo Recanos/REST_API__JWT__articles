@@ -67,7 +67,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"token": "youraccesstoken"
 ## Работа со статьями
 API для статей позволяет выполнять API запросы для получения списка статей, создания новых статей, а также для редактирования и удаления существующих статей. Для доступа к этому функционалу используется эндпоинт /articles/.
 
-# Получение списка всех статей
+### Получение списка всех статей
 
 Чтобы получить список всех статей, отправьте GET запрос на /articles/
 
@@ -77,7 +77,7 @@ API для статей позволяет выполнять API запросы
 curl -X GET http://localhost:8000/articles/
 ```
 
-## Создание новой статьи
+### Создание новой статьи
 
 Для создания новой статьи аутентифицированный пользователь должен отправить POST запрос с JSON содержащим заголовок и тело статьи на эндпоинт /articles/
 
@@ -86,7 +86,7 @@ curl -X GET http://localhost:8000/articles/
 ```bash
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer youraccesstoken" -d '{"header": "Article Title", "body": "Content of the article."}' http://localhost:8000/articles/
 ```
-## Обновление существующей статьи
+### Обновление существующей статьи
 
 Для обновления статьи отправьте PUT запрос с JSON содержащим новый заголовок и тело на /articles/{id}/, где {id} - это идентификатор статьи.
 
@@ -96,7 +96,7 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer youra
 curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer youraccesstoken" -d '{"header": "Updated Title", "body": "Updated content."}' http://localhost:8000/articles/{id}/
 ```
 
-# Удаление статьи
+### Удаление статьи
 
 Чтобы удалить статью, отправьте DELETE запрос на /articles/{id}/, где {id} - это идентификатор статьи.
 
