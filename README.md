@@ -6,7 +6,7 @@
 ```bash
 git clone https://github.com/Recanos/REST_API__JWT__articles.git
 cd REST_API__JWT__articles
-python -m venv venv
+python -m venv venv # Для линукса python3 -m venv venv
 source venv/bin/activate # Для Windows используйте venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
@@ -105,3 +105,11 @@ curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer yourac
 ```bash
 curl -X DELETE -H "Authorization: Bearer youraccesstoken" http://localhost:8000/articles/{id}/
 ```
+
+## Дополнительно
+
+- Я оставил заполненную базу данных, чтобы можно было произвести какую-либо работу с данными, добавленными раньше 1го дня или другое (Для проверки редактирования статей в permissions.py можно поменять промежуток на минуты).
+- При использовании access токена в поле Authorization нужно использовать слово Bearer (можно поменять в settings.py в разделе с simplejwt)
+- В файле settings.py есть отдельный блок по работе с Django REST framework (работа с пагинацией, аутентификация через simplejwt)
+- Так же в settings.py есть отдельный блок по работе с Simple JWT, вкючая алгоритм шифрования, время жизни токенов и тд
+- 
