@@ -30,8 +30,16 @@ https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html
 Пример запроса для регистрации пользователя:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"username": "newuser", "password": "newpassword"}' http://localhost:8000/api/register/
+curl --location 'http://localhost:8000/api/register/' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: csrftoken=ZSa81qNmrZiVZ3X0QyhFAdSn8GiVjoVtARdKx3ZgtJvxxHmWjqJxR1U7gMUOOCTR' \
+--data '{
+    "username" : "qwerty123",
+    "password" : "1233343Ww"
+}'
 ```
+Пример postman:
+
 
 После успешной регистрации пользователь может аутентифицироваться и получить JWT токены для доступа к защищенным маршрутам API
 
@@ -42,8 +50,15 @@ curl -X POST -H "Content-Type: application/json" -d '{"username": "newuser", "pa
 Пример запроса на получение токенов:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"username": "yourusername", "password": "yourpassword"}' http://localhost:8000/api/token/
+curl --location 'http://localhost:8000/api/token/' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: csrftoken=ZSa81qNmrZiVZ3X0QyhFAdSn8GiVjoVtARdKx3ZgtJvxxHmWjqJxR1U7gMUOOCTR' \
+--data '{
+    "username" : "qwerty123",
+    "password" : "1233343Ww"
+}'
 ```
+Пример postman:
 
 ## Обновление Access токена
 
@@ -52,8 +67,14 @@ curl -X POST -H "Content-Type: application/json" -d '{"username": "yourusername"
 Пример запроса для обновления access токена:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"refresh": "yourrefreshtoken"}' http://localhost:8000/api/token/refresh/
+curl --location 'http://localhost:8000/api/token/refresh/' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: csrftoken=ZSa81qNmrZiVZ3X0QyhFAdSn8GiVjoVtARdKx3ZgtJvxxHmWjqJxR1U7gMUOOCTR' \
+--data '{
+"refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxNDM5NTQwOSwiaWF0IjoxNzE0MzA5MDA5LCJqdGkiOiI2NGY5OTg0ZjMxZjg0NDhhOGJlY2RmZTE1NGU0MjYxZiIsInVzZXJfaWQiOjEzfQ.evvXfOXvINEv6guaGgMJWJWkbK20uT6g-S8tko45xoA"
+}'
 ```
+Пример postman:
 
 ##Проверка JWT токена
 
@@ -62,8 +83,15 @@ curl -X POST -H "Content-Type: application/json" -d '{"refresh": "yourrefreshtok
 Пример запроса на проверку токена:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"token": "youraccesstoken"}' http://localhost:8000/api/token/verify/
+curl --location 'http://localhost:8000/api/token/verify/' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: csrftoken=ZSa81qNmrZiVZ3X0QyhFAdSn8GiVjoVtARdKx3ZgtJvxxHmWjqJxR1U7gMUOOCTR' \
+--data '{
+"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE0MzA5Mzg3LCJpYXQiOjE3MTQzMDkwMDksImp0aSI6IjllYjQ4OGE3YmMyZDQ1MGE4MzdjOTYyYTExYWQwOTg1IiwidXNlcl9pZCI6MTN9.EvxxzXrZ2nyaxWk3vQLMZQOwIIHxIC63And9xnA5xew"
+}'
 ```
+Пример postman:
+
 ## Работа со статьями
 API для статей позволяет выполнять API запросы для получения списка статей, создания новых статей, а также для редактирования и удаления существующих статей. Для доступа к этому функционалу используется эндпоинт /articles/.
 
@@ -74,8 +102,11 @@ API для статей позволяет выполнять API запросы
 Пример запроса на получение списка статей:
 
 ```bash
-curl -X GET http://localhost:8000/articles/
+curl --location 'http://localhost:8000/articles/' \
+--header 'Cookie: csrftoken=ZSa81qNmrZiVZ3X0QyhFAdSn8GiVjoVtARdKx3ZgtJvxxHmWjqJxR1U7gMUOOCTR' \
+--data ''
 ```
+Пример postman:
 
 ### Создание новой статьи
 
@@ -84,8 +115,18 @@ curl -X GET http://localhost:8000/articles/
 Пример запроса для создания статьи:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer youraccesstoken" -d '{"header": "Article Title", "body": "Content of the article."}' http://localhost:8000/articles/
+curl --location 'http://localhost:8000/articles/' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE0MzA5NzU4LCJpYXQiOjE3MTQzMDk0NTgsImp0aSI6IjBhMjAzZDczMWVjZjRlNDA5ZTNmYzRhMWQ2ZGExNmI4IiwidXNlcl9pZCI6MTN9.80Q-xVsoOl6xbmMieSjRPl8Paj83VVu9DGn1VPUxdlA' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: csrftoken=ZSa81qNmrZiVZ3X0QyhFAdSn8GiVjoVtARdKx3ZgtJvxxHmWjqJxR1U7gMUOOCTR' \
+--data '{
+    "header" : "Молоко",
+    "body" : "Я покупаю молоко по пятницам и субботам"
+}'
 ```
+
+Пример postman:
+
 ### Обновление существующей статьи
 
 Для обновления статьи отправьте PUT запрос с JSON содержащим новый заголовок и тело на /articles/{id}/, где {id} - это идентификатор статьи.
@@ -93,8 +134,17 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer youra
 Пример запроса на обновление статьи:
 
 ```bash
-curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer youraccesstoken" -d '{"header": "Updated Title", "body": "Updated content."}' http://localhost:8000/articles/{id}/
+curl --location --request PUT 'http://localhost:8000/articles/26/' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE0MzA5NzU4LCJpYXQiOjE3MTQzMDk0NTgsImp0aSI6IjBhMjAzZDczMWVjZjRlNDA5ZTNmYzRhMWQ2ZGExNmI4IiwidXNlcl9pZCI6MTN9.80Q-xVsoOl6xbmMieSjRPl8Paj83VVu9DGn1VPUxdlA' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: csrftoken=ZSa81qNmrZiVZ3X0QyhFAdSn8GiVjoVtARdKx3ZgtJvxxHmWjqJxR1U7gMUOOCTR' \
+--data '{
+    "header" : "Квас",
+    "body" : "Я покупаю квас по четвергам"
+}'
 ```
+
+Пример postman:
 
 ### Удаление статьи
 
@@ -103,8 +153,13 @@ curl -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer yourac
 Пример запроса для удаления статьи:
 
 ```bash
-curl -X DELETE -H "Authorization: Bearer youraccesstoken" http://localhost:8000/articles/{id}/
+curl --location --request DELETE 'http://localhost:8000/articles/26/' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE0MzA5NzU4LCJpYXQiOjE3MTQzMDk0NTgsImp0aSI6IjBhMjAzZDczMWVjZjRlNDA5ZTNmYzRhMWQ2ZGExNmI4IiwidXNlcl9pZCI6MTN9.80Q-xVsoOl6xbmMieSjRPl8Paj83VVu9DGn1VPUxdlA' \
+--header 'Cookie: csrftoken=ZSa81qNmrZiVZ3X0QyhFAdSn8GiVjoVtARdKx3ZgtJvxxHmWjqJxR1U7gMUOOCTR' \
+--data ''
 ```
+
+Пример postman:
 
 ## Дополнительно
 
