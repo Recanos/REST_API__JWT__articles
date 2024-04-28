@@ -40,6 +40,7 @@ curl --location 'http://localhost:8000/api/register/' \
 ```
 Пример postman:
 
+(images/register.png)
 
 После успешной регистрации пользователь может аутентифицироваться и получить JWT токены для доступа к защищенным маршрутам API
 
