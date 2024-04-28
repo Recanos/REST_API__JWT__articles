@@ -40,7 +40,7 @@ curl --location 'http://localhost:8000/api/register/' \
 ```
 Пример postman:
 
-[Регистрация](images/register.png)
+![Регистрация](images/register.png)
 
 После успешной регистрации пользователь может аутентифицироваться и получить JWT токены для доступа к защищенным маршрутам API
 
@@ -61,6 +61,8 @@ curl --location 'http://localhost:8000/api/token/' \
 ```
 Пример postman:
 
+![Получение токенов](images/token.png)
+
 ## Обновление Access токена
 
 Когда срок жизни access токена истекает, можно получить новый с помощью refresh токена, отправив POST запрос на /api/token/refresh/
@@ -76,6 +78,8 @@ curl --location 'http://localhost:8000/api/token/refresh/' \
 }'
 ```
 Пример postman:
+
+![Обновление токена](images/refresh.png)
 
 ##Проверка JWT токена
 
@@ -93,6 +97,8 @@ curl --location 'http://localhost:8000/api/token/verify/' \
 ```
 Пример postman:
 
+![Проверка токена](images/verify.png)
+
 ## Работа со статьями
 API для статей позволяет выполнять API запросы для получения списка статей, создания новых статей, а также для редактирования и удаления существующих статей. Для доступа к этому функционалу используется эндпоинт /articles/.
 
@@ -108,6 +114,8 @@ curl --location 'http://localhost:8000/articles/' \
 --data ''
 ```
 Пример postman:
+
+![Список статей](images/get.png)
 
 ### Создание новой статьи
 
@@ -128,6 +136,10 @@ curl --location 'http://localhost:8000/articles/' \
 
 Пример postman:
 
+![Создание статьи](images/post_url.png)
+![](images/post_header.png)
+![](images/post_body.png)
+
 ### Обновление существующей статьи
 
 Для обновления статьи отправьте PUT запрос с JSON содержащим новый заголовок и тело на /articles/{id}/, где {id} - это идентификатор статьи.
@@ -147,6 +159,8 @@ curl --location --request PUT 'http://localhost:8000/articles/26/' \
 
 Пример postman:
 
+![Список статей](images/put_body_url.png)
+![](images/post_header.png)
 ### Удаление статьи
 
 Чтобы удалить статью, отправьте DELETE запрос на /articles/{id}/, где {id} - это идентификатор статьи.
@@ -162,10 +176,13 @@ curl --location --request DELETE 'http://localhost:8000/articles/26/' \
 
 Пример postman:
 
+![Удаление статьи](images/delete.png)
 ## Дополнительно
 
 - Я оставил заполненную базу данных, чтобы можно было произвести какую-либо работу с данными, добавленными раньше 1го дня или другое (Для проверки редактирования статей в permissions.py можно поменять промежуток на минуты).
 - При использовании access токена в поле Authorization нужно использовать слово Bearer (можно поменять в settings.py в разделе с simplejwt)
 - В файле settings.py есть отдельный блок по работе с Django REST framework (работа с пагинацией, аутентификация через simplejwt)
 - Так же в settings.py есть отдельный блок по работе с Simple JWT, вкючая алгоритм шифрования, время жизни токенов и тд
+- Вход в админку: пароль и username равен admin, так же пороль от всех юзеров равен "1233343Ww" для возможного тестирования
+- Во время работы токен может просрочиться (через 5 минут). Тогда нужно либо заново авторизоваться, либо обновить токен через api/token/refresh
 - 
